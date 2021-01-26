@@ -1,84 +1,41 @@
-public /**
-* Definition for singly-linked list.
-* public class ListNode {
-*     int val;
-*     ListNode next;
-*     ListNode() {}
-*     ListNode(int val) { this.val = val; }
-*     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-* }
-*/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-   public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-       ListNode currentL1 = l1;
-       ListNode currentL2 = l2;
-       int plus1 = 0;
-       ListNode result = new ListNode();
-       ListNode currentNode = result;
-       ListNode previousNode = null;
-       
-       while (currentL1 != null && currentL2 != null) {           
-           currentNode.val = ((currentL1.val + currentL2.val + plus1) % 10);
-           
-           if (previousNode != null)
-               previousNode.next = currentNode;
-           
-           previousNode = currentNode;
-           currentNode = new ListNode();
-           
-           if (currentL1.val + currentL2.val + plus1 >= 10)
-               plus1 = 1;
-           else
-               plus1 = 0;
-           
-           currentL1 = currentL1.next;
-           currentL2 = currentL2.next;
-       }
-       
-       while (currentL1 != null) {
-           currentNode.val = (currentL1.val + plus1) % 10;
-           
-           if (previousNode != null)
-               previousNode.next = currentNode;
-           
-           previousNode = currentNode;
-           currentNode = new ListNode();
-           
-           if (currentL1.val + plus1 >= 10)
-               plus1 = 1;
-           else
-               plus1 = 0;
-           
-           currentL1 = currentL1.next;
-       }
-       
-       while (currentL2 != null) {
-           currentNode.val = (currentL2.val + plus1) % 10;
-           
-           if (previousNode != null)
-               previousNode.next = currentNode;
-           
-           previousNode = currentNode;
-           currentNode = new ListNode();
-           
-           if (currentL2.val + plus1 >= 10)
-               plus1 = 1;
-           else
-               plus1 = 0;
-           
-           currentL2 = currentL2.next;
-       }
-       
-       if (plus1 > 0) {
-           currentNode.val = plus1;
-           
-           if (previousNode != null)
-               previousNode.next = currentNode;
-       }
-       
-       
-       return result;
-   }
-}class AddTwoNumbers {
-    
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode();
+        int carry = 0;
+        ListNode curNodeResult = dummyHead;
+        ListNode curNode1 = l1;
+        ListNode curNode2 = l2;
+        
+        while (curNode1 != null || curNode2 != null) {
+            int parcel1 = curNode1 != null ? curNode1.val : 0;
+            int parcel2 = curNode2 != null ? curNode2.val : 0;
+            
+            int result = parcel1 + parcel2 + carry;
+            carry = result >= 10 ? 1 : 0;
+            result = result >= 10 ? result % 10 : result;
+            
+            ListNode nextNodeResult = new ListNode(result);
+            curNodeResult.next = nextNodeResult;
+            curNodeResult = nextNodeResult;
+            curNode1 = curNode1 == null ? null : curNode1.next;
+            curNode2 = curNode2 == null ? null : curNode2.next;
+        }
+        
+        if (carry != 0) {
+            ListNode nextNodeResult = new ListNode(carry);
+            curNodeResult.next = nextNodeResult;
+        }
+        
+        return dummyHead.next;
+    }
 }
