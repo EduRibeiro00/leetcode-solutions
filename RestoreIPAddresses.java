@@ -8,7 +8,7 @@ class Solution {
             
             for (int j = 1; i + j < n && j < 4; j++) {
                 String second = s.substring(i, i + j);
-                is (!isValidPart(second)) continue;
+                if (!isValidPart(second)) continue;
                 for (int k = 1; i + j + k < n && k < 4; k++) {
                     String third = s.substring(i + j, i + j + k);
                     String fourth = s.substring(i + j + k);

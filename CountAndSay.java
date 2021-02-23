@@ -2,7 +2,6 @@ class Solution {
     public String countAndSay(int n) {
         String res = "1";
         for (int i = 1; i < n; i++) {
-            System.out.println(i + " - " + res);
             res = getNewString(res);
         }
         return res;

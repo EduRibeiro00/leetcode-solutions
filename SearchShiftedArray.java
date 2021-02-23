@@ -1,3 +1,7 @@
+//**************************************************************
+// WARNING: Same as SearchRotatedArray, better solution there
+//**************************************************************
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

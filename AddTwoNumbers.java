@@ -21,8 +21,8 @@ class Solution {
             int parcel2 = curNode2 != null ? curNode2.val : 0;
             
             int result = parcel1 + parcel2 + carry;
-            carry = result >= 10 ? 1 : 0;
-            result = result >= 10 ? result % 10 : result;
+            carry = result / 10;
+            result %= 10;
             
             ListNode nextNodeResult = new ListNode(result);
             curNodeResult.next = nextNodeResult;
